@@ -44,4 +44,8 @@ export class ScheduleListComponent implements OnInit {
   deleteSchedule(id: number) {
     this.schedules = this.schedules.filter(s => s.id !== id);
   }
+
+  backToDashboard() {
+    this.router.navigate(['/dashboard']);
+  }
 }

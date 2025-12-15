@@ -2,8 +2,10 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './Auth/Login.component';
 import { DashboardComponent } from './Pages/dashboard.component';
+
 import { BillListComponent } from './Pages/bill-list.component';
 import { ScheduleListComponent } from './Pages/schedule-list.component';
+import { AddScheduleComponent } from './Pages/add-schedule.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -13,6 +15,7 @@ export const routes: Routes = [
     children: [
       { path: 'bill-list', component: BillListComponent },
       { path: 'schedule-list', component: ScheduleListComponent },
+      { path: 'add-schedule', component: AddScheduleComponent },
       // tambahkan child routes lain jika perlu
     ]
   }
