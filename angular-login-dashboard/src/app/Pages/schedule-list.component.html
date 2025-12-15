@@ -1,0 +1,39 @@
+<!-- src/app/pages/schedule-list.component.html -->
+
+<div class="container mt-4">
+  <h3>Schedule List</h3>
+
+  <!-- Search and Add Button -->
+  <div class="mb-3">
+    <input type="text" class="form-control w-50 mb-2" placeholder="Search by student name" [(ngModel)]="searchQuery">
+    <button class="btn btn-primary me-2" (click)="addNewSchedule()">Add New Schedule</button>
+    <button class="btn btn-secondary" (click)="router.navigate(['/dashboard'])">Back to Dashboard</button>
+  </div>
+
+  <!-- Table -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Schedule Day</th>
+        <th>Schedule Time</th>
+        <th>Teacher</th>
+        <th>Student</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let schedule of filteredSchedules(); let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ schedule.day }}</td>
+        <td>{{ schedule.time }}</td>
+        <td>{{ schedule.teacher }}</td>
+        <td>{{ schedule.student }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm me-1" (click)="editSchedule(schedule.id)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteSchedule(schedule.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

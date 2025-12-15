@@ -1,0 +1,12 @@
+
+/* Sidebar Admin Menu full height */
+.sidebar-admin {
+	min-height: 80vh;
+	height: 100vh;
+	position: sticky;
+	top: 0;
+}
+
+.sidebar-admin .nav-link {
+	width: 100%;
+}

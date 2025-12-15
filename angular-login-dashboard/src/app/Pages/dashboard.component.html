@@ -1,15 +1,34 @@
+<!-- src/app/pages/dashboard.component.html -->
+
 <app-navbar></app-navbar>
 
-<div class="container mt-4">
-  <h3>Dashboard</h3>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="card text-bg-primary mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Menu 1</h5>
-          <p class="card-text">Informasi menu pertama</p>
-        </div>
-      </div>
+<div class="container-fluid mt-4">
+  <div class="row" style="min-height: 80vh;">
+    <!-- Sidebar Menu -->
+    <div class="sidebar-admin col-md-2 bg-primary text-white p-3 d-flex flex-column align-items-start" style="min-height: 80vh;">
+      <h5>Admin Menu</h5>
+      <ul class="nav flex-column w-100">
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/dashboard/schedule-list">Manage Schedules</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/dashboard/bill-list">Manage Bills</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="#">Manage Student Data</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="#">Manage Teachers Data</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/dashboard">Back</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="col-md-10" style="min-height: 80vh;">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

@@ -1,0 +1,36 @@
+<!-- src/app/pages/edit-schedule.component.html -->
+
+<div class="container mt-4">
+  <h3>Edit Schedule</h3>
+
+  <div class="mb-3">
+    <label for="scheduleDay" class="form-label">Schedule Day</label>
+    <input type="text" class="form-control" id="scheduleDay" [(ngModel)]="scheduleDay" placeholder="e.g., Monday">
+  </div>
+
+  <div class="mb-3">
+    <label for="scheduleTime" class="form-label">Schedule Time</label>
+    <input type="time" class="form-control" id="scheduleTime" [(ngModel)]="scheduleTime">
+  </div>
+
+  <div class="mb-3">
+    <label for="selectTeacher" class="form-label">Select Teacher</label>
+    <select class="form-select" id="selectTeacher" [(ngModel)]="selectedTeacher">
+      <option value="" disabled selected>Select a teacher</option>
+      <option *ngFor="let teacher of teachers" [value]="teacher">{{ teacher }}</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="selectStudent" class="form-label">Select Student</label>
+    <select class="form-select" id="selectStudent" [(ngModel)]="selectedStudent">
+      <option value="" disabled selected>Select a student</option>
+      <option *ngFor="let student of students" [value]="student">{{ student }}</option>
+    </select>
+  </div>
+
+  <div class="d-flex gap-2">
+    <button class="btn btn-primary" (click)="updateSchedule()">Update Schedule</button>
+    <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+  </div>
+</div>
