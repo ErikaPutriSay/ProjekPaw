@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { AuthService } from '../Services/auth.services';
 
 @Component({
   standalone: true,
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './Login.component.html',
+  imports: [FormsModule]
 })
 export class LoginComponent {
-  username = '';
-  password = '';
+  username = 'admin';
+  password = 'admin';
   error = '';
 
   constructor(private auth: AuthService, private router: Router) {}
