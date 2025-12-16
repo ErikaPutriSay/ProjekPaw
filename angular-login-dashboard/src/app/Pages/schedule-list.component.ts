@@ -22,6 +22,16 @@ export class ScheduleListComponent implements OnInit {
   ];
   searchQuery = '';
 
+
+  // Untuk edit inline
+  teachers = ['Herna Marlindawati', 'Meiliana Tirtadjaya', 'Umi Muslikhatun'];
+  students = ['Mike Celiano Sutanto', 'Giselle Naomi Sutanto'];
+  editRowId: number | null = null;
+  editDay = '';
+  editTime = '';
+  editTeacher = '';
+  editStudent = '';
+
   constructor(public router: Router) {}
 
   ngOnInit() {}
@@ -37,8 +47,35 @@ export class ScheduleListComponent implements OnInit {
     this.router.navigate(['/dashboard/add-schedule']);
   }
 
+
   editSchedule(id: number) {
     this.router.navigate(['/dashboard/edit-schedule', id]);
+  }
+
+  startInlineEdit(schedule: any) {
+    this.editRowId = schedule.id;
+    this.editDay = schedule.day;
+    this.editTime = schedule.time;
+    this.editTeacher = schedule.teacher;
+    this.editStudent = schedule.student;
+  }
+
+  saveInlineEdit(id: number) {
+    const idx = this.schedules.findIndex(s => s.id === id);
+    if (idx !== -1) {
+      this.schedules[idx] = {
+        ...this.schedules[idx],
+        day: this.editDay,
+        time: this.editTime,
+        teacher: this.editTeacher,
+        student: this.editStudent
+      };
+    }
+    this.editRowId = null;
+  }
+
+  cancelInlineEdit() {
+    this.editRowId = null;
   }
 
   deleteSchedule(id: number) {

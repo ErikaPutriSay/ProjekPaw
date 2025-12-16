@@ -1,32 +1,31 @@
 <!-- src/app/pages/bill-list.component.html -->
 
 <div class="container mt-4">
-  <h3>Bill List</h3>
-
-  <!-- Add Button -->
-  <div class="mb-3">
-    <button class="btn btn-primary me-2" (click)="addNewBill()">Add New Bill</button>
-    <button class="btn btn-secondary" (click)="router.navigate(['/dashboard'])">Back to Dashboard</button>
+  <h2 class="fw-bold">Bills Management</h2>
+  <div class="mb-3 mt-3 d-flex align-items-center gap-2">
+    <input type="text" class="form-control w-50" placeholder="Search by student name" [(ngModel)]="searchQuery">
+    <button class="btn btn-primary" (click)="searchBills()">Search</button>
   </div>
-
-  <!-- Table -->
-  <table class="table table-striped">
+  <div class="mb-3">
+    <button class="btn btn-primary" (click)="addNewBill()">Create New Bill</button>
+  </div>
+  <table class="table table-bordered bg-white">
     <thead>
       <tr>
         <th>No</th>
-        <th>Student</th>
-        <th>Price</th>
+        <th>Student Name</th>
         <th>Month</th>
+        <th>Price</th>
         <th>Status</th>
-        <th>Action</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let bill of bills; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ bill.student }}</td>
-        <td>{{ bill.price | currency }}</td>
         <td>{{ bill.month }}</td>
+        <td>Rp {{ bill.price | number:'1.0-0' }}</td>
         <td>{{ bill.status }}</td>
         <td>
           <button class="btn btn-warning btn-sm me-1" (click)="editBill(bill.id)">Edit</button>

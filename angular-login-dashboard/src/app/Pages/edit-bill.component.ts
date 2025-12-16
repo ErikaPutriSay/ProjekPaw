@@ -1,5 +1,4 @@
 // src/app/pages/edit-bill.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService, Bill } from '../Services/data.service';
@@ -57,6 +56,10 @@ export class EditBillComponent implements OnInit {
     this.dataService.updateBill(updatedBill);
 
     alert('Bill updated successfully!');
+    this.router.navigate(['/dashboard/bill-list']);
+  }
+
+  backToBills() {
     this.router.navigate(['/dashboard/bill-list']);
   }
 

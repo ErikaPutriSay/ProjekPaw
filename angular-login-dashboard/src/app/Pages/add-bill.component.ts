@@ -38,6 +38,10 @@ export class AddBillComponent {
     this.router.navigate(['/dashboard/bill-list']);
   }
 
+  backToBills() {
+    this.router.navigate(['/dashboard/bill-list']);
+  }
+
   cancel() {
     this.router.navigate(['/dashboard/bill-list']);
   }

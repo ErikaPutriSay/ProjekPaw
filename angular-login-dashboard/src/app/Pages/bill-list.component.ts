@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 })
 export class BillListComponent implements OnInit {
   bills: Bill[] = [];
+  allBills: Bill[] = [];
+  searchQuery: string = '';
 
   constructor(private dataService: DataService, public router: Router) {}
 
@@ -22,7 +24,17 @@ export class BillListComponent implements OnInit {
   }
 
   loadBills() {
-    this.bills = this.dataService.getBills();
+    this.allBills = this.dataService.getBills();
+    this.bills = [...this.allBills];
+  }
+
+  searchBills() {
+    const query = this.searchQuery.trim().toLowerCase();
+    if (!query) {
+      this.bills = [...this.allBills];
+    } else {
+      this.bills = this.allBills.filter(bill => bill.student.toLowerCase().includes(query));
+    }
   }
 
   editBill(id: number) {

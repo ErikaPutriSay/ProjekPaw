@@ -25,13 +25,35 @@
     <tbody>
       <tr *ngFor="let schedule of filteredSchedules(); let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ schedule.day }}</td>
-        <td>{{ schedule.time }}</td>
-        <td>{{ schedule.teacher }}</td>
-        <td>{{ schedule.student }}</td>
+        <td *ngIf="editRowId !== schedule.id">{{ schedule.day }}</td>
+        <td *ngIf="editRowId === schedule.id">
+          <input type="text" class="form-control" [(ngModel)]="editDay">
+        </td>
+        <td *ngIf="editRowId !== schedule.id">{{ schedule.time }}</td>
+        <td *ngIf="editRowId === schedule.id">
+          <input type="time" class="form-control" [(ngModel)]="editTime">
+        </td>
+        <td *ngIf="editRowId !== schedule.id">{{ schedule.teacher }}</td>
+        <td *ngIf="editRowId === schedule.id">
+          <select class="form-select" [(ngModel)]="editTeacher">
+            <option *ngFor="let teacher of teachers" [value]="teacher">{{ teacher }}</option>
+          </select>
+        </td>
+        <td *ngIf="editRowId !== schedule.id">{{ schedule.student }}</td>
+        <td *ngIf="editRowId === schedule.id">
+          <select class="form-select" [(ngModel)]="editStudent">
+            <option *ngFor="let student of students" [value]="student">{{ student }}</option>
+          </select>
+        </td>
         <td>
-          <button class="btn btn-warning btn-sm me-1" (click)="editSchedule(schedule.id)">Edit</button>
-          <button class="btn btn-danger btn-sm" (click)="deleteSchedule(schedule.id)">Delete</button>
+          <ng-container *ngIf="editRowId !== schedule.id">
+            <button class="btn btn-warning btn-sm me-1" (click)="startInlineEdit(schedule)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteSchedule(schedule.id)">Delete</button>
+          </ng-container>
+          <ng-container *ngIf="editRowId === schedule.id">
+            <button class="btn btn-success btn-sm me-1" (click)="saveInlineEdit(schedule.id)">Save</button>
+            <button class="btn btn-secondary btn-sm" (click)="cancelInlineEdit()">Cancel</button>
+          </ng-container>
         </td>
       </tr>
     </tbody>
