@@ -85,4 +85,6 @@ export class ScheduleListComponent implements OnInit {
   backToDashboard() {
     this.router.navigate(['/dashboard']);
   }
+
+  noop() {}
 }

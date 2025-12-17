@@ -5,7 +5,10 @@
 
   <!-- Search and Add Button -->
   <div class="mb-3">
-    <input type="text" class="form-control w-50 mb-2" placeholder="Search by student name" [(ngModel)]="searchQuery">
+    <div class="d-flex align-items-center mb-2" style="gap: 8px;">
+      <input type="text" class="form-control w-50" placeholder="Search by student name" [(ngModel)]="searchQuery">
+      <button class="btn btn-primary" (click)="noop()">Search</button>
+    </div>
     <button class="btn btn-primary me-2" (click)="addNewSchedule()">Add New Schedule</button>
     <button class="btn btn-secondary" (click)="backToDashboard()">Back to Dashboard</button>
   </div>
