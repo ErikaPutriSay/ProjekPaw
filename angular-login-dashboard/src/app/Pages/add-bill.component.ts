@@ -2,7 +2,8 @@
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from '../Services/data.service';
+import { ApiService } from '../Services/api.service';
+import { NotificationService } from '../Services/notification.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -19,23 +20,28 @@ export class AddBillComponent {
 
   students = ['Giselle Naomi Sutanto', 'Mike Celiano Sutanto'];
 
-  constructor(private dataService: DataService, private router: Router) {}
+  constructor(private api: ApiService, private router: Router, private notify: NotificationService) {}
 
-  submitBill() {
+  async submitBill() {
     if (!this.selectedStudent || this.price <= 0 || !this.month) {
-      alert('Please fill all required fields');
+      this.notify.show('Silakan isi semua bidang yang diperlukan');
       return;
     }
 
-    this.dataService.addBill({
-      student: this.selectedStudent,
-      price: this.price,
-      month: this.month,
-      status: this.status
-    });
-
-    alert('Bill created successfully!');
-    this.router.navigate(['/dashboard/bill-list']);
+    try {
+      await this.api.createBill({
+        student: this.selectedStudent,
+        price: this.price,
+        month: this.month,
+        status: this.status
+      });
+      this.notify.show('Data tersimpan semuanya');
+      this.router.navigate(['/dashboard/bill-list']);
+    } catch (err) {
+      console.error(err);
+      const msg = (err as any)?.error?.error || (err as any)?.message || 'Failed to create bill';
+      this.notify.show(msg);
+    }
   }
 
   backToBills() {

@@ -2,7 +2,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService, Bill } from '../Services/data.service';
+import { Bill } from '../Services/data.service';
+import { ApiService } from '../Services/api.service';
+import { NotificationService } from '../Services/notification.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -13,19 +15,29 @@ import { CommonModule } from '@angular/common';
   imports: [FormsModule, CommonModule]
 })
 export class BillListComponent implements OnInit {
-  bills: Bill[] = [];
-  allBills: Bill[] = [];
+  bills: any[] = [];
+  allBills: any[] = [];
   searchQuery: string = '';
 
-  constructor(private dataService: DataService, public router: Router) {}
+  constructor(private api: ApiService, public router: Router, private notify: NotificationService) {}
 
   ngOnInit() {
     this.loadBills();
   }
 
-  loadBills() {
-    this.allBills = this.dataService.getBills();
-    this.bills = [...this.allBills];
+  async loadBills() {
+    try {
+      this.allBills = await this.api.getBills();
+      this.bills = [...this.allBills];
+    } catch (err) {
+      console.error('Failed to load bills', err);
+      const status = (err as any)?.status;
+      if (status === 404) {
+        return;
+      }
+      const msg = (err as any)?.error?.error || (err as any)?.message || 'Failed to load bills';
+      this.notify.show(msg);
+    }
   }
 
   searchBills() {
@@ -37,14 +49,26 @@ export class BillListComponent implements OnInit {
     }
   }
 
-  editBill(id: number) {
-    this.router.navigate(['/dashboard/edit-bill', id]);
-  }
+  // editBill(id: number) {
+  //   this.router.navigate(['/dashboard/edit-bill', id]);
+  // }
 
-  deleteBill(id: number) {
-    if (confirm('Are you sure you want to delete this bill?')) {
-      this.dataService.deleteBill(id);
-      this.loadBills(); // Refresh list
+  // Di dalam class BillListComponent
+editBill(id: string) {
+  // Ini akan mengarahkan ke rute /dashboard/edit-bill/ID_TAGIHAN
+  this.router.navigate(['/dashboard/edit-bill', id]);
+}
+
+  async deleteBill(id: string) {
+    const ok = await this.notify.confirm('Yakin ingin menghapus tagihan ini?');
+    if (!ok) return;
+    try {
+      await this.api.deleteBill(id);
+      this.loadBills();
+    } catch (err) {
+      console.error(err);
+      const msg = (err as any)?.error?.error || (err as any)?.message || 'Gagal menghapus tagihan';
+      this.notify.show(msg);
     }
   }
 

@@ -3,6 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService, Schedule } from '../Services/data.service';
+import { NotificationService } from '../Services/notification.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -24,7 +25,8 @@ export class EditScheduleComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
-    private router: Router
+    private router: Router,
+    private notify: NotificationService
   ) {}
 
   ngOnInit() {
@@ -43,7 +45,7 @@ export class EditScheduleComponent implements OnInit {
 
   updateSchedule() {
     if (!this.schedule || !this.scheduleDay || !this.scheduleTime || !this.selectedTeacher || !this.selectedStudent) {
-      alert('Please fill all fields');
+      this.notify.show('Please fill all fields');
       return;
     }
 
@@ -57,7 +59,7 @@ export class EditScheduleComponent implements OnInit {
 
     this.dataService.updateSchedule(updatedSchedule);
 
-    alert('Schedule updated successfully!');
+    this.notify.show('Data tersimpan semuanya');
     this.router.navigate(['/dashboard/schedule-list']);
   }
 

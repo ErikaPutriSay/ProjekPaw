@@ -28,7 +28,10 @@
         <td>Rp {{ bill.price | number:'1.0-0' }}</td>
         <td>{{ bill.status }}</td>
         <td>
-          <button class="btn btn-warning btn-sm me-1" (click)="editBill(bill.id)">Edit</button>
+         <button class="btn btn-warning btn-sm me-2 text-dark" (click)="editBill(bill._id || bill.id)">
+  <i class="bi bi-pencil-square"></i> Edit
+</button>
+
           <button class="btn btn-danger btn-sm" (click)="deleteBill(bill.id)">Delete</button>
         </td>
       </tr>

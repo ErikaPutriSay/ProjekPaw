@@ -1,34 +1,48 @@
-<!-- src/app/pages/dashboard.component.html -->
-
 <app-navbar></app-navbar>
 
 <div class="container-fluid mt-4">
-  <div class="row" style="min-height: 80vh;">
-    <!-- Sidebar Menu -->
-    <div class="sidebar-admin col-md-2 bg-primary text-white p-3 d-flex flex-column align-items-start" style="min-height: 80vh;">
-      <h5>Admin Menu</h5>
-      <ul class="nav flex-column w-100">
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/dashboard">Dashboard</a>
+  <div class="row">
+    
+    <div class="col-md-2 bg-primary text-white p-3 rounded shadow-sm" style="min-height: 80vh;">
+      <h5 class="mb-4 text-center fw-bold border-bottom pb-2">ADMIN MENU</h5>
+      <ul class="nav flex-column">
+        
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white d-flex align-items-center" routerLink="/dashboard" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="bg-white bg-opacity-25 rounded fw-bold">
+            <i class="bi bi-speedometer2 me-2"></i> Dashboard
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/dashboard/schedule-list">Manage Schedules</a>
+
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white d-flex align-items-center" routerLink="/dashboard/schedule-list" routerLinkActive="bg-white bg-opacity-25 rounded fw-bold">
+            <i class="bi bi-calendar-event me-2"></i> Manage Schedules
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/dashboard/bill-list">Manage Bills</a>
+
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white d-flex align-items-center" routerLink="/dashboard/bill-list" routerLinkActive="bg-white bg-opacity-25 rounded fw-bold">
+            <i class="bi bi-wallet2 me-2"></i> Manage Bills
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="#">Manage Student Data</a>
+
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white d-flex align-items-center" routerLink="/dashboard/participants" routerLinkActive="bg-white bg-opacity-25 rounded fw-bold">
+            <i class="bi bi-people me-2"></i> Manage Students
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="#">Manage Teachers Data</a>
+
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white d-flex align-items-center" routerLink="/dashboard/teachers" routerLinkActive="bg-white bg-opacity-25 rounded fw-bold">
+            <i class="bi bi-person-badge me-2"></i> Manage Teachers
+          </a>
         </li>
+
       </ul>
     </div>
 
-    <!-- Main Content Area -->
-    <div class="col-md-10" style="min-height: 80vh;">
+    <div class="col-md-10 ps-4">
       <router-outlet></router-outlet>
     </div>
+
   </div>
 </div>

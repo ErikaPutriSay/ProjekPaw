@@ -1,28 +1,66 @@
-<!-- src/app/pages/add-schedule.component.html -->
-
 <div class="container mt-4">
-  <h1>Add New Schedule</h1>
-  <form (ngSubmit)="createSchedule()">
-    <div class="mb-3">
-      <label for="scheduleDay" class="form-label">Schedule Day</label>
-      <input type="text" class="form-control" id="scheduleDay" [(ngModel)]="scheduleDay" name="scheduleDay" required>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Add New Schedule</h2>
+    <button class="btn btn-secondary shadow-sm" (click)="cancel()">
+      <i class="bi bi-arrow-left"></i> Back to List
+    </button>
+  </div>
+
+  <div class="card shadow-sm border-0">
+    <div class="card-body p-4">
+      <form (ngSubmit)="createSchedule()">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="scheduleDay" class="form-label fw-semibold">Schedule Day</label>
+            <select class="form-select" id="scheduleDay" [(ngModel)]="scheduleDay" name="scheduleDay" required>
+              <option value="" disabled selected>Select Day</option>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="scheduleTime" class="form-label fw-semibold">Schedule Time</label>
+            <input type="time" class="form-control" id="scheduleTime" [(ngModel)]="scheduleTime" name="scheduleTime" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="selectTeacher" class="form-label fw-semibold">Select Teacher</label>
+            <select class="form-select" id="selectTeacher" [(ngModel)]="selectedTeacher" name="selectedTeacher" required>
+              <option value="" disabled selected>-- Choose Teacher --</option>
+              <option *ngFor="let t of teachers" [value]="t.firstName + ' ' + t.lastName">
+                {{ t.firstName }} {{ t.lastName }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="selectStudent" class="form-label fw-semibold">Select Student</label>
+            <select class="form-select" id="selectStudent" [(ngModel)]="selectedStudent" name="selectedStudent" required>
+              <option value="" disabled selected>-- Choose Student --</option>
+              <option *ngFor="let s of students" [value]="s.firstName + ' ' + s.lastName">
+                {{ s.firstName }} {{ s.lastName }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button type="button" class="btn btn-light px-4 me-md-2" (click)="cancel()">Cancel</button>
+          <button type="submit" class="btn btn-primary px-5 shadow-sm">
+            <i class="bi bi-check-circle me-1"></i> Create Schedule
+          </button>
+        </div>
+      </form>
     </div>
-    <div class="mb-3">
-      <label for="scheduleTime" class="form-label">Schedule Time</label>
-      <input type="time" class="form-control" id="scheduleTime" [(ngModel)]="scheduleTime" name="scheduleTime" required>
-    </div>
-    <div class="mb-3">
-      <label for="selectTeacher" class="form-label">Select Teacher</label>
-      <select class="form-select" id="selectTeacher" [(ngModel)]="selectedTeacher" name="selectedTeacher" required>
-        <option *ngFor="let teacher of teachers" [value]="teacher">{{ teacher }}</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label for="selectStudent" class="form-label">Select Student</label>
-      <select class="form-select" id="selectStudent" [(ngModel)]="selectedStudent" name="selectedStudent" required>
-        <option *ngFor="let student of students" [value]="student">{{ student }}</option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Create Schedule</button>
-  </form>
+  </div>
 </div>

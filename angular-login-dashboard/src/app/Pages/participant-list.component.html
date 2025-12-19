@@ -1,0 +1,45 @@
+<div class="mb-4"> 
+  <h2 class="fw-bold">Student List</h2>
+  <button class="btn btn-primary shadow-sm mt-2" (click)="addParticipant()">
+    <i class="bi bi-person-plus-fill me-2"></i>Add Student
+  </button>
+</div>
+
+<div *ngIf="loading" class="text-center my-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <p class="text-muted mt-2">Loading data, please wait...</p>
+</div>
+
+<div class="card border-0 shadow-sm" *ngIf="!loading && participants.length > 0">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr>
+          <th class="ps-3">First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of participants">
+          <td class="ps-3">{{ p.firstName }}</td>
+          <td>{{ p.lastName }}</td>
+          <td>{{ p.email }}</td>
+          <td>{{ p.phone }}</td>
+          <td class="text-center">
+            <button class="btn btn-warning btn-sm me-2 text-dark" (click)="editParticipant(p._id || p.id)">
+              <i class="bi bi-pencil-square"></i> Edit
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="deleteParticipant(p._id || p.id)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

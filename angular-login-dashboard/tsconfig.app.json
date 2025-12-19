@@ -10,7 +10,7 @@
   },
   "include": [
     "src/**/*.ts"
-  ],
+, "src/app/Pages/participant-list.component html"  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]
